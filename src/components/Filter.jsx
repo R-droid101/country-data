@@ -1,11 +1,9 @@
-function Filter(props) {
-  const displayCountries = props.countries.filter((country) =>
-    country.name.common
-      .toLowerCase()
-      .includes(props.displayDetails.toLowerCase())
-  );
+import CountryDetails from './CountryDetails';
 
-  if (displayCountries.length > 10) {
+function Filter({ setShow, setCountry, displayCountries, ...props }) {
+
+
+  if (displayCountries.length > 10 || displayCountries.length === 0) {
     return <div>Too many matches, specify another filter</div>;
   }
 
@@ -13,9 +11,18 @@ function Filter(props) {
     return (
       <>
         <div>
-          {displayCountries.map((country) => (
-            <div key={country.name.official}>{country.name.common}</div>
-          ))}
+          {displayCountries.map((country) => {
+            return (
+              <div key={country.name.official}>{country.name.common} <button onClick={() => {
+                if (props.show.show && props.show.country === country)
+                  setShow({ show: false, country: country })
+                else
+                  setShow({ show: true, country: country })
+              }}>show</button>
+              </div>
+            )
+          })}
+          {props.show.show ? <CountryDetails country={props.show.country} /> : <></>}
         </div>
       </>
     );
@@ -23,9 +30,9 @@ function Filter(props) {
 
   else {
     return (
-      <>
-        <div>
-          {displayCountries.map(country => {
+
+      <div>
+        {/* {displayCountries.map(country => {
             return (
               <div key={country.name.official}>
                 <h1>{country.name.common}</h1>
@@ -40,9 +47,10 @@ function Filter(props) {
                 <img src={country.flags.png} alt="Flag" />
               </div>
             )
-          })}
-        </div>
-      </>
+          })} */}
+        <CountryDetails country={displayCountries[0]} />
+        {/* {console.log(displayCountries[0])} */}
+      </div>
     )
   }
 }
