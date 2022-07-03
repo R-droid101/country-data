@@ -27,9 +27,8 @@ function App() {
 
   return (
     <>
-      <div>
-        filter countries
-        <input value={displayDetails} onChange={changeDetails} />
+      <div className="main">
+        Filter Countries: <input value={displayDetails} onChange={changeDetails} />
       </div>
       <Filter
         setShow={setShow}

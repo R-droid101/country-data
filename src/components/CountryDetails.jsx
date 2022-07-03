@@ -1,12 +1,12 @@
 function CountryDetails(props) {
   return (
-    <div>
+    <div className="filter">
       <h1>{props.country.name.common}</h1>
       <p>
-        capital {props.country.capital}<br />
-        populaton {props.country.population}
+        Capital: {props.country.capital}<br />
+        Population: {props.country.population}
       </p>
-      <h2>languages</h2>
+      <h2>Languages</h2>
       <ul>
         {Object.keys(props.country.languages).map((key, value) => <li key={key}>{props.country.languages[key]}</li>)}
       </ul>
